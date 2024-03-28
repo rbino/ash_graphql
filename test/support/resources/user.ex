@@ -2,6 +2,7 @@ defmodule AshGraphql.Test.User do
   @moduledoc false
 
   use Ash.Resource,
+    domain: AshGraphql.Test.Domain,
     data_layer: Ash.DataLayer.Ets,
     authorizers: [Ash.Policy.Authorizer],
     extensions: [AshGraphql.Resource]

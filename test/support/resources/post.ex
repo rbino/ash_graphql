@@ -93,6 +93,7 @@ defmodule AshGraphql.Test.Post do
   alias AshGraphql.Test.SponsoredComment
 
   use Ash.Resource,
+    domain: AshGraphql.Test.Domain,
     data_layer: Ash.DataLayer.Ets,
     authorizers: [Ash.Policy.Authorizer],
     extensions: [AshGraphql.Resource]

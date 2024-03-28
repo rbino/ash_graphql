@@ -1,6 +1,7 @@
 defmodule AshGraphql.Test.MapTypes do
   @moduledoc false
   use Ash.Resource,
+    domain: AshGraphql.Test.Domain,
     data_layer: Ash.DataLayer.Ets,
     extensions: [AshGraphql.Resource]
 

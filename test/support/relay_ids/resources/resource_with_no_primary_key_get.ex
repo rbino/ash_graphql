@@ -2,6 +2,7 @@ defmodule AshGraphql.Test.RelayIds.ResourceWithNoPrimaryKeyGet do
   @moduledoc false
 
   use Ash.Resource,
+    domain: AshGraphql.Test.RelayIds.Domain,
     data_layer: Ash.DataLayer.Ets,
     extensions: [AshGraphql.Resource]
 
