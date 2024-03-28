@@ -1,9 +1,9 @@
-defmodule AshGraphql.Test.RootLevelErrorsApi do
+defmodule AshGraphql.Test.RootLevelErrorsDomain do
   @moduledoc false
 
-  use Ash.Api,
+  use Ash.Domain,
     extensions: [
-      AshGraphql.Api
+      AshGraphql.Domain
     ],
     otp_app: :ash_graphql
 

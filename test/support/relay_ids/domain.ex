@@ -1,9 +1,9 @@
-defmodule AshGraphql.Test.RelayIds.Api do
+defmodule AshGraphql.Test.RelayIds.Domain do
   @moduledoc false
 
-  use Ash.Api,
+  use Ash.Domain,
     extensions: [
-      AshGraphql.Api
+      AshGraphql.Domain
     ],
     otp_app: :ash_graphql
 

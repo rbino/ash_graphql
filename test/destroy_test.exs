@@ -3,14 +3,14 @@ defmodule AshGraphql.DestroyTest do
 
   setup do
     on_exit(fn ->
-      Application.delete_env(:ash_graphql, AshGraphql.Test.Api)
+      Application.delete_env(:ash_graphql, AshGraphql.Test.Domain)
 
       AshGraphql.TestHelpers.stop_ets()
     end)
   end
 
   test "a destroy works" do
-    post = AshGraphql.Test.Api.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
+    post = AshGraphql.Test.Domain.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
 
     resp =
       """
@@ -38,7 +38,7 @@ defmodule AshGraphql.DestroyTest do
   end
 
   test "a soft destroy works" do
-    post = AshGraphql.Test.Api.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
+    post = AshGraphql.Test.Domain.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
 
     resp =
       """
@@ -66,7 +66,7 @@ defmodule AshGraphql.DestroyTest do
   end
 
   test "a destroy with a configured read action and no identity works" do
-    AshGraphql.Test.Api.create!(
+    AshGraphql.Test.Domain.create!(
       Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar", best: true)
     )
 
@@ -92,7 +92,7 @@ defmodule AshGraphql.DestroyTest do
   end
 
   test "a destroy with an error" do
-    post = AshGraphql.Test.Api.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
+    post = AshGraphql.Test.Domain.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
 
     resp =
       """
@@ -154,11 +154,11 @@ defmodule AshGraphql.DestroyTest do
   end
 
   test "root level error on destroy" do
-    Application.put_env(:ash_graphql, AshGraphql.Test.Api,
+    Application.put_env(:ash_graphql, AshGraphql.Test.Domain,
       graphql: [show_raised_errors?: true, root_level_errors?: true]
     )
 
-    post = AshGraphql.Test.Api.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
+    post = AshGraphql.Test.Domain.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
 
     resp =
       """

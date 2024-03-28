@@ -71,7 +71,7 @@ defmodule AshGraphql.MixProject do
         "documentation/topics/graphql-generation.md",
         "documentation/topics/modifying-the-resolution.md",
         "documentation/topics/relay.md",
-        "documentation/dsls/DSL:-AshGraphql.Api.md",
+        "documentation/dsls/DSL:-AshGraphql.Domain.md",
         "documentation/dsls/DSL:-AshGraphql.Resource.md"
       ],
       groups_for_extras: [
@@ -86,9 +86,9 @@ defmodule AshGraphql.MixProject do
         ],
         Introspection: [
           AshGraphql.Resource.Info,
-          AshGraphql.Api.Info,
+          AshGraphql.Domain.Info,
           AshGraphql.Resource,
-          AshGraphql.Api,
+          AshGraphql.Domain,
           AshGraphql.Resource.Action,
           AshGraphql.Resource.ManagedRelationship,
           AshGraphql.Resource.Mutation,
@@ -170,10 +170,11 @@ defmodule AshGraphql.MixProject do
         "spark.replace_doc_links",
         "spark.cheat_sheets_in_search"
       ],
-      "spark.formatter": "spark.formatter --extensions AshGraphql.Resource,AshGraphql.Api",
+      "spark.formatter": "spark.formatter --extensions AshGraphql.Resource,AshGraphql.Domain",
       "spark.cheat_sheets_in_search":
-        "spark.cheat_sheets_in_search --extensions AshGraphql.Resource,AshGraphql.Api",
-      "spark.cheat_sheets": "spark.cheat_sheets --extensions AshGraphql.Resource,AshGraphql.Api"
+        "spark.cheat_sheets_in_search --extensions AshGraphql.Resource,AshGraphql.Domain",
+      "spark.cheat_sheets":
+        "spark.cheat_sheets --extensions AshGraphql.Resource,AshGraphql.Domain"
     ]
   end
 end

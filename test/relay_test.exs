@@ -20,7 +20,7 @@ defmodule AshGraphql.RelayTest do
             :create,
             name: name
           )
-          |> AshGraphql.Test.Api.create!()
+          |> AshGraphql.Test.Domain.create!()
 
         for text <- letters do
           AshGraphql.Test.Post
@@ -31,7 +31,7 @@ defmodule AshGraphql.RelayTest do
             on_no_match: :error,
             on_lookup: :relate_and_update
           )
-          |> AshGraphql.Test.Api.create!()
+          |> AshGraphql.Test.Domain.create!()
         end
       end
 

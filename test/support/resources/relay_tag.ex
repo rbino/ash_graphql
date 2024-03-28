@@ -34,7 +34,7 @@ defmodule AshGraphql.Test.RelayTag do
   end
 
   identities do
-    identity(:name, [:name], pre_check_with: AshGraphql.Test.Api)
+    identity(:name, [:name], pre_check_with: AshGraphql.Test.Domain)
   end
 
   relationships do

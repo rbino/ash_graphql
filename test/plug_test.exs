@@ -26,7 +26,7 @@ defmodule AshGraphql.PlugTest do
     user =
       AshGraphql.Test.User
       |> Ash.Changeset.for_create(:create, %{name: "Marty McFly"})
-      |> AshGraphql.Test.Api.create!()
+      |> AshGraphql.Test.Domain.create!()
 
     resp =
       """
@@ -67,7 +67,7 @@ defmodule AshGraphql.PlugTest do
     tag =
       AshGraphql.Test.MultitenantTag
       |> Ash.Changeset.for_create(:create, [name: "1985"], tenant: tenant)
-      |> AshGraphql.Test.Api.create!()
+      |> AshGraphql.Test.Domain.create!()
 
     resp =
       """

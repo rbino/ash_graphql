@@ -29,7 +29,7 @@ defmodule AshGraphql.Test.RelayIds.ResourceWithNoPrimaryKeyGet do
   end
 
   identities do
-    identity(:name, [:name], pre_check_with: AshGraphql.Test.RelayIds.Api)
+    identity(:name, [:name], pre_check_with: AshGraphql.Test.RelayIds.Domain)
   end
 
   relationships do

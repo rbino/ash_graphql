@@ -39,9 +39,9 @@ defmodule AshGraphql.Test.Channel do
       {:array, AshGraphql.Test.MessageUnion},
       fn record,
          %{
-           api: api
+           domain: domain
          } ->
-        record = api.load!(record, :messages)
+        record = domain.load!(record, :messages)
 
         {:ok,
          record.messages

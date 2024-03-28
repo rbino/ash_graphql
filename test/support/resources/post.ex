@@ -63,8 +63,8 @@ defmodule RelatedPosts do
   use Ash.Resource.ManualRelationship
   require Ash.Query
 
-  def load(posts, _opts, %{api: api}) do
-    posts = api.load!(posts, :tags)
+  def load(posts, _opts, %{domain: domain}) do
+    posts = domain.load!(posts, :tags)
 
     {
       :ok,
@@ -78,7 +78,7 @@ defmodule RelatedPosts do
           AshGraphql.Test.Post
           |> Ash.Query.filter(tags.id in ^tag_ids)
           |> Ash.Query.filter(id != ^post.id)
-          |> api.read!()
+          |> domain.read!()
 
         {post.id, other_posts}
       end)
@@ -112,8 +112,8 @@ defmodule AshGraphql.Test.Post do
   graphql do
     type :post
 
-    attribute_types integer_as_string_in_api: :string
-    attribute_input_types integer_as_string_in_api: :string
+    attribute_types integer_as_string_in_domain: :string
+    attribute_input_types integer_as_string_in_domain: :string
     field_names text_1_and_2: :text1_and2
     keyset_field :keyset
 
@@ -206,7 +206,7 @@ defmodule AshGraphql.Test.Post do
             __MODULE__
           end
 
-        input.api.count(query)
+        input.domain.count(query)
       end)
     end
 
@@ -218,7 +218,7 @@ defmodule AshGraphql.Test.Post do
       run(fn input, _ ->
         __MODULE__
         |> Ash.Query.limit(1)
-        |> input.api.read_one()
+        |> input.domain.read_one()
       end)
     end
 
@@ -333,7 +333,7 @@ defmodule AshGraphql.Test.Post do
     attribute(:enum_with_ash_description, AshGraphql.Test.EnumWithAshDescription)
     attribute(:best, :boolean)
     attribute(:score, :float)
-    attribute(:integer_as_string_in_api, :integer)
+    attribute(:integer_as_string_in_domain, :integer)
     attribute(:embed, AshGraphql.Test.Embed)
     attribute(:text1, :string)
     attribute(:text2, :string)
@@ -400,8 +400,8 @@ defmodule AshGraphql.Test.Post do
       # This is very inefficient, do not copy this pattern into your own app!!!
       values =
         [
-          SponsoredComment |> AshGraphql.Test.Api.read!(),
-          Comment |> AshGraphql.Test.Api.read!()
+          SponsoredComment |> AshGraphql.Test.Domain.read!(),
+          Comment |> AshGraphql.Test.Domain.read!()
         ]
         |> List.flatten()
         |> Stream.filter(&(&1.post_id == record.id))

@@ -3,7 +3,7 @@ defmodule AshGraphql.UpdateTest do
 
   setup do
     on_exit(fn ->
-      Application.delete_env(:ash_graphql, AshGraphql.Test.Api)
+      Application.delete_env(:ash_graphql, AshGraphql.Test.Domain)
 
       try do
         AshGraphql.TestHelpers.stop_ets()
@@ -15,7 +15,7 @@ defmodule AshGraphql.UpdateTest do
   end
 
   test "an update works" do
-    post = AshGraphql.Test.Api.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
+    post = AshGraphql.Test.Domain.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
 
     resp =
       """
@@ -137,7 +137,7 @@ defmodule AshGraphql.UpdateTest do
 
   test "an update with a configured read action and no identity works" do
     post =
-      AshGraphql.Test.Api.create!(
+      AshGraphql.Test.Domain.create!(
         Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar", best: true)
       )
 
@@ -169,7 +169,7 @@ defmodule AshGraphql.UpdateTest do
   end
 
   test "an update with a configured read action and no identity works with an argument the same name as an attribute" do
-    AshGraphql.Test.Api.create!(
+    AshGraphql.Test.Domain.create!(
       Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar", best: true)
     )
 
@@ -203,7 +203,7 @@ defmodule AshGraphql.UpdateTest do
 
   test "arguments are threaded properly" do
     post =
-      AshGraphql.Test.Api.create!(
+      AshGraphql.Test.Domain.create!(
         Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar", best: true)
       )
 
@@ -242,12 +242,12 @@ defmodule AshGraphql.UpdateTest do
   end
 
   test "root level error" do
-    Application.put_env(:ash_graphql, AshGraphql.Test.Api,
+    Application.put_env(:ash_graphql, AshGraphql.Test.Domain,
       graphql: [show_raised_errors?: true, root_level_errors?: true]
     )
 
     post =
-      AshGraphql.Test.Api.create!(
+      AshGraphql.Test.Domain.create!(
         Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar", best: true)
       )
 
@@ -282,7 +282,7 @@ defmodule AshGraphql.UpdateTest do
   end
 
   test "referencing a hidden input is not allowed" do
-    post = AshGraphql.Test.Api.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
+    post = AshGraphql.Test.Domain.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
 
     resp =
       """
