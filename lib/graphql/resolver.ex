@@ -1,8 +1,8 @@
 defmodule AshGraphql.Graphql.Resolver do
   @moduledoc false
 
-  require Ash.Query
   require Logger
+  import Ash.Expr
   import AshGraphql.TraceHelpers
   import AshGraphql.ContextHelpers
 
@@ -1498,9 +1498,9 @@ defmodule AshGraphql.Graphql.Resolver do
 
         if value do
           if expr do
-            {:cont, {:ok, Ash.Query.expr(^expr and ref(^key) == ^value)}}
+            {:cont, {:ok, Ash.Expr.expr(^expr and ^ref(key) == ^value)}}
           else
-            {:cont, {:ok, Ash.Query.expr(ref(^key) == ^value)}}
+            {:cont, {:ok, Ash.Expr.expr(^ref(key) == ^value)}}
           end
         else
           {:halt, {:error, "Required key not present"}}
