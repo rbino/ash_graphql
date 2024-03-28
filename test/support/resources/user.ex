@@ -30,7 +30,7 @@ defmodule AshGraphql.Test.User do
     create(:create_policies)
 
     read :current_user do
-      filter(id: actor(:id))
+      filter(expr(id == ^actor(:id)))
     end
 
     read :current_user_with_metadata do
