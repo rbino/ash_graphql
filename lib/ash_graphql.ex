@@ -76,7 +76,7 @@ defmodule AshGraphql do
           domain ->
             domain
         end)
-        |> Enum.map(fn domain -> {domain, Ash.Domain.Info.depend_on_resources(domain), false} end)
+        |> Enum.map(fn domain -> {domain, Ash.Domain.Info.resources(domain), false} end)
         |> List.update_at(0, fn {domain, resources, _} -> {domain, resources, true} end)
 
       @ash_resources Enum.flat_map(domains, &elem(&1, 1))
