@@ -30,7 +30,7 @@ defmodule AshGraphql.Test.Channel do
   attributes do
     uuid_primary_key(:id)
 
-    create_timestamp(:created_at, private?: false)
+    create_timestamp(:created_at, public?: true)
   end
 
   calculations do

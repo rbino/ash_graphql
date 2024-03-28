@@ -2234,7 +2234,7 @@ defmodule AshGraphql.Graphql.Resolver do
       end
 
     action.arguments
-    |> Enum.reject(& &1.private?)
+    |> Enum.filter(& &1.public?)
     |> Enum.reduce(query, fn argument, query ->
       case Map.fetch(arg_values, argument.name) do
         {:ok, value} ->

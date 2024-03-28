@@ -836,7 +836,7 @@ defmodule AshGraphql.Resource do
       end
 
     read_action.arguments
-    |> Enum.reject(& &1.private?)
+    |> Enum.filter(& &1.public?)
     |> Enum.map(fn argument ->
       type =
         argument.type
@@ -1122,7 +1122,7 @@ defmodule AshGraphql.Resource do
 
     argument_fields =
       action.arguments
-      |> Enum.reject(& &1.private?)
+      |> Enum.filter(& &1.public?)
       |> Enum.map(fn argument ->
         name = argument_names[action.name][argument.name] || argument.name
 
@@ -1397,7 +1397,7 @@ defmodule AshGraphql.Resource do
 
   defp generic_action_args(action, resource, schema) do
     action.arguments
-    |> Enum.reject(& &1.private?)
+    |> Enum.filter(& &1.public?)
     |> Enum.map(fn argument ->
       type =
         argument.type
@@ -1555,7 +1555,7 @@ defmodule AshGraphql.Resource do
 
   defp read_args(resource, action, schema, hide_inputs) do
     action.arguments
-    |> Enum.reject(&(&1.private? || &1.name in hide_inputs))
+    |> Enum.filter(&(&1.public? && &1.name not in hide_inputs))
     |> Enum.map(fn argument ->
       type =
         argument.type
@@ -3789,9 +3789,7 @@ defmodule AshGraphql.Resource do
       [field] ->
         attribute = Ash.Resource.Info.attribute(resource, field)
 
-        if attribute.private? do
-          []
-        else
+        if attribute.public? do
           [
             %Absinthe.Blueprint.Schema.FieldDefinition{
               description: attribute.description,
@@ -3805,6 +3803,8 @@ defmodule AshGraphql.Resource do
               __reference__: ref(__ENV__)
             }
           ]
+        else
+          []
         end
 
       fields ->

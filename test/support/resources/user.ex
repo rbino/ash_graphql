@@ -53,6 +53,7 @@ defmodule AshGraphql.Test.User do
     attribute(:name, :string)
 
     attribute(:secret, :string) do
+      public?(true)
       allow_nil? false
       default("super secret")
     end

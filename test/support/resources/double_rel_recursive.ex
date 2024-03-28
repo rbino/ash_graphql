@@ -34,7 +34,7 @@ defmodule AshGraphql.Test.DoubleRelRecursive do
     belongs_to :myself, DoubleRelRecursive do
       source_attribute(:recursive_id)
       allow_nil?(false)
-      private?(true)
+      public?(true)
     end
 
     has_many :first_rel, DoubleRelRecursive do

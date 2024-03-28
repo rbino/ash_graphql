@@ -382,7 +382,7 @@ defmodule AshGraphql.Test.Post do
       default("test")
     end
 
-    create_timestamp(:created_at, private?: false)
+    create_timestamp(:created_at, public?: true)
   end
 
   calculations do
