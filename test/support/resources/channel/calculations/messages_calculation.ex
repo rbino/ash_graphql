@@ -1,6 +1,6 @@
 defmodule AshGraphql.Test.PageOfChannelMessagesCalculation do
   @moduledoc false
-  use Ash.Calculation
+  use Ash.Resource.Calculation
 
   def load(_, _, context) do
     limit = context[:limit] || 100

@@ -36,7 +36,7 @@ end
 
 defmodule FullTextCalculation do
   @moduledoc false
-  use Ash.Calculation
+  use Ash.Resource.Calculation
 
   def calculate(posts, _, _) do
     Enum.map(posts, fn post ->
