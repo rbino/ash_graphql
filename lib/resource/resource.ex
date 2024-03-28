@@ -1768,13 +1768,13 @@ defmodule AshGraphql.Resource do
 
         Enum.reduce(defaults, Ash.Changeset.manage_relationship_schema(), fn {key, value},
                                                                              manage_opts ->
-          Spark.OptionsHelpers.set_default!(manage_opts, key, value)
+          Spark.Options.Helpers.set_default!(manage_opts, key, value)
         end)
       else
         Ash.Changeset.manage_relationship_schema()
       end
 
-    manage_opts = Spark.OptionsHelpers.validate!(opts[:opts], manage_opts_schema)
+    manage_opts = Spark.Options.validate!(opts[:opts], manage_opts_schema)
 
     fields = manage_fields(manage_opts, managed_relationship, relationship, schema)
 

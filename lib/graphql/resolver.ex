@@ -586,13 +586,13 @@ defmodule AshGraphql.Graphql.Resolver do
 
             Enum.reduce(defaults, Ash.Changeset.manage_relationship_schema(), fn {key, value},
                                                                                  manage_opts ->
-              Spark.OptionsHelpers.set_default!(manage_opts, key, value)
+              Spark.Options.Helpers.set_default!(manage_opts, key, value)
             end)
           else
             Ash.Changeset.manage_relationship_schema()
           end
 
-        manage_opts = Spark.OptionsHelpers.validate!(opts[:opts], manage_opts_schema)
+        manage_opts = Spark.Options.validate!(opts[:opts], manage_opts_schema)
 
         fields =
           manage_opts
@@ -1734,7 +1734,8 @@ defmodule AshGraphql.Graphql.Resolver do
                       {:__ash_graphql_attribute__, selection.alias},
                       Ash.Resource.Calculation.LoadAttribute,
                       Keyword.put(load_opts, :attribute, attribute.name),
-                      {attribute.type, attribute.constraints}
+                      attribute.type,
+                      attribute.constraints
                     )
 
                   [
@@ -1751,7 +1752,8 @@ defmodule AshGraphql.Graphql.Resolver do
                       {:__ash_graphql_attribute__, selection.alias},
                       Ash.Resource.Calculation.LoadAttribute,
                       Keyword.merge(load_opts, load: loads, attribute: attribute.name),
-                      {attribute.type, attribute.constraints}
+                      attribute.type,
+                      attribute.constraints
                     )
 
                   [
@@ -1821,7 +1823,8 @@ defmodule AshGraphql.Graphql.Resolver do
                 {:__ash_graphql_relationship__, selection.alias},
                 Ash.Resource.Calculation.LoadRelationship,
                 Keyword.merge(load_opts, relationship: relationship.name, query: related_query),
-                {type, constraints}
+                type,
+                constraints
               )
 
             [
