@@ -8,6 +8,8 @@ defmodule AshGraphql.Test.RelayIds.Domain do
     otp_app: :ash_graphql
 
   resources do
-    registry(AshGraphql.Test.RelayIds.Registry)
+    resource(AshGraphql.Test.RelayIds.Post)
+    resource(AshGraphql.Test.RelayIds.ResourceWithNoPrimaryKeyGet)
+    resource(AshGraphql.Test.RelayIds.User)
   end
 end
