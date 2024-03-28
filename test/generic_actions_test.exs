@@ -55,7 +55,7 @@ defmodule AshGraphql.GenericActionsTest do
   end
 
   test "generic action mutations can be run" do
-    post = AshGraphql.Test.Domain.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
+    post = Ash.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
 
     resp =
       """
@@ -79,7 +79,7 @@ defmodule AshGraphql.GenericActionsTest do
   end
 
   test "generic action mutations can be run with input" do
-    post = AshGraphql.Test.Domain.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
+    post = Ash.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
 
     resp =
       """

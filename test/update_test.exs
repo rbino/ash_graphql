@@ -15,7 +15,7 @@ defmodule AshGraphql.UpdateTest do
   end
 
   test "an update works" do
-    post = AshGraphql.Test.Domain.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
+    post = Ash.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
 
     resp =
       """
@@ -137,7 +137,7 @@ defmodule AshGraphql.UpdateTest do
 
   test "an update with a configured read action and no identity works" do
     post =
-      AshGraphql.Test.Domain.create!(
+      Ash.create!(
         Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar", best: true)
       )
 
@@ -169,7 +169,7 @@ defmodule AshGraphql.UpdateTest do
   end
 
   test "an update with a configured read action and no identity works with an argument the same name as an attribute" do
-    AshGraphql.Test.Domain.create!(
+    Ash.create!(
       Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar", best: true)
     )
 
@@ -203,7 +203,7 @@ defmodule AshGraphql.UpdateTest do
 
   test "arguments are threaded properly" do
     post =
-      AshGraphql.Test.Domain.create!(
+      Ash.create!(
         Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar", best: true)
       )
 
@@ -247,7 +247,7 @@ defmodule AshGraphql.UpdateTest do
     )
 
     post =
-      AshGraphql.Test.Domain.create!(
+      Ash.create!(
         Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar", best: true)
       )
 
@@ -282,7 +282,7 @@ defmodule AshGraphql.UpdateTest do
   end
 
   test "referencing a hidden input is not allowed" do
-    post = AshGraphql.Test.Domain.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
+    post = Ash.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
 
     resp =
       """

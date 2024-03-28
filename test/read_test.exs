@@ -12,11 +12,11 @@ defmodule AshGraphql.ReadTest do
   test "float fields works correctly" do
     AshGraphql.Test.Post
     |> Ash.Changeset.for_create(:create, text: "foo", published: true, score: 9.8)
-    |> AshGraphql.Test.Domain.create!()
+    |> Ash.create!()
 
     AshGraphql.Test.Post
     |> Ash.Changeset.for_create(:create, text: "bar", published: true, score: 9.85)
-    |> AshGraphql.Test.Domain.create!()
+    |> Ash.create!()
 
     resp =
       """
@@ -41,11 +41,11 @@ defmodule AshGraphql.ReadTest do
   test "union fields works correctly" do
     AshGraphql.Test.Post
     |> Ash.Changeset.for_create(:create, text: "foo", published: true, simple_union: 10)
-    |> AshGraphql.Test.Domain.create!()
+    |> Ash.create!()
 
     AshGraphql.Test.Post
     |> Ash.Changeset.for_create(:create, text: "bar", published: true, simple_union: "foo")
-    |> AshGraphql.Test.Domain.create!()
+    |> Ash.create!()
 
     resp =
       """
@@ -83,7 +83,7 @@ defmodule AshGraphql.ReadTest do
     |> Ash.Changeset.for_create(:create,
       name: "My Name"
     )
-    |> AshGraphql.Test.Domain.create!()
+    |> Ash.create!()
 
     resp =
       """
@@ -107,7 +107,7 @@ defmodule AshGraphql.ReadTest do
       |> Ash.Changeset.for_create(:create,
         name: "My Name"
       )
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
     resp =
       """
@@ -132,7 +132,7 @@ defmodule AshGraphql.ReadTest do
     user =
       AshGraphql.Test.User
       |> Ash.Changeset.for_create(:create, %{name: "fred"})
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
     post =
       AshGraphql.Test.Post
@@ -144,7 +144,7 @@ defmodule AshGraphql.ReadTest do
           published: true
         }
       )
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
     post
     |> Ash.Changeset.for_update(
@@ -153,7 +153,7 @@ defmodule AshGraphql.ReadTest do
         comments: [%{text: "comment", author_id: user.id}]
       }
     )
-    |> AshGraphql.Test.Domain.update!()
+    |> Ash.update!()
 
     resp =
       """
@@ -198,11 +198,11 @@ defmodule AshGraphql.ReadTest do
   test "a read with arguments works" do
     AshGraphql.Test.Post
     |> Ash.Changeset.for_create(:create, text: "foo", published: true)
-    |> AshGraphql.Test.Domain.create!()
+    |> Ash.create!()
 
     AshGraphql.Test.Post
     |> Ash.Changeset.for_create(:create, text: "bar", published: false)
-    |> AshGraphql.Test.Domain.create!()
+    |> Ash.create!()
 
     resp =
       """
@@ -231,7 +231,7 @@ defmodule AshGraphql.ReadTest do
       integer_as_string_in_domain: 1,
       published: true
     )
-    |> AshGraphql.Test.Domain.create!()
+    |> Ash.create!()
 
     resp =
       """
@@ -254,12 +254,12 @@ defmodule AshGraphql.ReadTest do
     post =
       AshGraphql.Test.Post
       |> Ash.Changeset.for_create(:create, text: "foo", published: true)
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
     AshGraphql.Test.Comment
     |> Ash.Changeset.for_create(:create, %{text: "stuff"})
     |> Ash.Changeset.force_change_attribute(:post_id, post.id)
-    |> AshGraphql.Test.Domain.create!()
+    |> Ash.create!()
 
     resp =
       """
@@ -290,12 +290,12 @@ defmodule AshGraphql.ReadTest do
     post =
       AshGraphql.Test.Post
       |> Ash.Changeset.for_create(:create, text: "foo", published: true)
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
     AshGraphql.Test.Comment
     |> Ash.Changeset.for_create(:create, %{text: "stuff"})
     |> Ash.Changeset.force_change_attribute(:post_id, post.id)
-    |> AshGraphql.Test.Domain.create!()
+    |> Ash.create!()
 
     resp =
       """
@@ -332,13 +332,13 @@ defmodule AshGraphql.ReadTest do
     post =
       AshGraphql.Test.Post
       |> Ash.Changeset.for_create(:create, text: "foo", published: true)
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
     for _ <- 0..1 do
       AshGraphql.Test.Comment
       |> Ash.Changeset.for_create(:create, %{text: "stuff"})
       |> Ash.Changeset.force_change_attribute(:post_id, post.id)
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
     end
 
     resp =
@@ -424,7 +424,7 @@ defmodule AshGraphql.ReadTest do
   test "a read with a loaded field works" do
     AshGraphql.Test.Post
     |> Ash.Changeset.for_create(:create, text: "bar", published: true)
-    |> AshGraphql.Test.Domain.create!()
+    |> Ash.create!()
 
     resp =
       """
@@ -452,7 +452,7 @@ defmodule AshGraphql.ReadTest do
   test "the same calculation can be loaded twice with different arguments via aliases" do
     AshGraphql.Test.Post
     |> Ash.Changeset.for_create(:create, text: "bar", text1: "1", text2: "2", published: true)
-    |> AshGraphql.Test.Domain.create!()
+    |> Ash.create!()
 
     resp =
       """
@@ -475,11 +475,11 @@ defmodule AshGraphql.ReadTest do
   test "the same calculation can be sorted on twice with different arguments via aliases" do
     AshGraphql.Test.Post
     |> Ash.Changeset.for_create(:create, text: "bar", text1: "1", text2: "2", published: true)
-    |> AshGraphql.Test.Domain.create!()
+    |> Ash.create!()
 
     AshGraphql.Test.Post
     |> Ash.Changeset.for_create(:create, text: "bar", text1: "1", text2: "2", published: true)
-    |> AshGraphql.Test.Domain.create!()
+    |> Ash.create!()
 
     resp =
       """
@@ -507,7 +507,7 @@ defmodule AshGraphql.ReadTest do
     record =
       AshGraphql.Test.NonIdPrimaryKey
       |> Ash.Changeset.for_create(:create, %{})
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
     resp =
       """
@@ -535,7 +535,7 @@ defmodule AshGraphql.ReadTest do
     record =
       AshGraphql.Test.CompositePrimaryKeyNotEncoded
       |> Ash.Changeset.for_create(:create, %{})
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
     resp =
       """
@@ -570,7 +570,7 @@ defmodule AshGraphql.ReadTest do
     record =
       AshGraphql.Test.CompositePrimaryKey
       |> Ash.Changeset.for_create(:create, %{})
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
     resp =
       """
@@ -601,17 +601,17 @@ defmodule AshGraphql.ReadTest do
       published: true,
       score: 9.8
     )
-    |> AshGraphql.Test.Domain.create!()
+    |> Ash.create!()
 
     post =
       AshGraphql.Test.Post
       |> Ash.Changeset.for_create(:create, text: "foo", published: true)
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
     AshGraphql.Test.Comment
     |> Ash.Changeset.for_create(:create, %{text: "stuff"})
     |> Ash.Changeset.force_change_attribute(:post_id, post.id)
-    |> AshGraphql.Test.Domain.create!()
+    |> Ash.create!()
 
     resp =
       """
@@ -638,7 +638,7 @@ defmodule AshGraphql.ReadTest do
       published: true,
       foo: %{foo: "foo", bar: "bar"}
     )
-    |> AshGraphql.Test.Domain.create!()
+    |> Ash.create!()
 
     resp =
       """
@@ -682,7 +682,7 @@ defmodule AshGraphql.ReadTest do
       |> Ash.Changeset.for_create(:create,
         name: "My Name"
       )
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
     doc = """
     query CurrentUser {
@@ -712,7 +712,7 @@ defmodule AshGraphql.ReadTest do
         [name: "My Tag1"],
         tenant: tenant
       )
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
     doc = """
     query MultitenantTag($id: ID!) {
@@ -746,7 +746,7 @@ defmodule AshGraphql.ReadTest do
         [name: "My Tag"],
         tenant: tenant
       )
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
     post =
       AshGraphql.Test.Post
@@ -757,7 +757,7 @@ defmodule AshGraphql.ReadTest do
         on_no_match: {:create, :create_action},
         on_lookup: :relate
       )
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
     doc = """
     query MultitenantPostTag($id: ID!) {
@@ -798,7 +798,7 @@ defmodule AshGraphql.ReadTest do
         :create,
         name: "My Tag"
       )
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
     post_1 =
       AshGraphql.Test.Post
@@ -809,7 +809,7 @@ defmodule AshGraphql.ReadTest do
         on_no_match: {:create, :create_action},
         on_lookup: :relate
       )
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
     AshGraphql.Test.Post
     |> Ash.Changeset.for_create(:create, text: "bar", published: true)
@@ -819,7 +819,7 @@ defmodule AshGraphql.ReadTest do
       on_no_match: {:create, :create_action},
       on_lookup: :relate
     )
-    |> AshGraphql.Test.Domain.create!()
+    |> Ash.create!()
 
     doc = """
     query ($id: ID!) {
@@ -848,7 +848,7 @@ defmodule AshGraphql.ReadTest do
     test "loading through an embed works" do
       AshGraphql.Test.Post
       |> Ash.Changeset.new(embed_foo: %{type: "foo", foo: "fred"}, published: true)
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
       resp =
         """
@@ -882,11 +882,11 @@ defmodule AshGraphql.ReadTest do
     test "loading through a union works" do
       AshGraphql.Test.Post
       |> Ash.Changeset.new(text: "a", embed_union: %{type: :foo, foo: "fred"}, published: true)
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
       AshGraphql.Test.Post
       |> Ash.Changeset.new(text: "b", embed_union: %{type: :bar, bar: "george"}, published: true)
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
       resp =
         """
@@ -942,7 +942,7 @@ defmodule AshGraphql.ReadTest do
         embed_union_unnested: %{type: :foo, foo: "fred"},
         published: true
       )
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
       AshGraphql.Test.Post
       |> Ash.Changeset.new(
@@ -950,7 +950,7 @@ defmodule AshGraphql.ReadTest do
         embed_union_unnested: %{type: :bar, bar: "george"},
         published: true
       )
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
       resp =
         """
@@ -998,7 +998,7 @@ defmodule AshGraphql.ReadTest do
         embed_union_new_type_list: [%{type: :foo, foo: "fred"}],
         published: true
       )
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
       AshGraphql.Test.Post
       |> Ash.Changeset.new(
@@ -1006,7 +1006,7 @@ defmodule AshGraphql.ReadTest do
         embed_union_new_type_list: [%{type: :bar, bar: "george"}],
         published: true
       )
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
       resp =
         """
@@ -1060,7 +1060,7 @@ defmodule AshGraphql.ReadTest do
         embed_union_unnested: %{type: :foo, foo: "fred"},
         published: true
       )
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
       AshGraphql.Test.Post
       |> Ash.Changeset.new(
@@ -1068,7 +1068,7 @@ defmodule AshGraphql.ReadTest do
         embed_union_unnested: %{type: :bar, bar: "george"},
         published: true
       )
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
       resp =
         """
@@ -1122,14 +1122,14 @@ defmodule AshGraphql.ReadTest do
         embed_union_unnested: %{type: :foo, foo: "fred"},
         published: true
       )
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
       AshGraphql.Test.Post
       |> Ash.Changeset.new(
         text: "b",
         published: true
       )
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
       resp =
         """
@@ -1180,12 +1180,12 @@ defmodule AshGraphql.ReadTest do
       user1 =
         AshGraphql.Test.User
         |> Ash.Changeset.for_create(:create, %{name: "fred"})
-        |> AshGraphql.Test.Domain.create!()
+        |> Ash.create!()
 
       user2 =
         AshGraphql.Test.User
         |> Ash.Changeset.for_create(:create, %{name: "barney"})
-        |> AshGraphql.Test.Domain.create!()
+        |> Ash.create!()
 
       post1 =
         AshGraphql.Test.Post
@@ -1197,7 +1197,7 @@ defmodule AshGraphql.ReadTest do
             published: true
           }
         )
-        |> AshGraphql.Test.Domain.create!()
+        |> Ash.create!()
 
       post1 =
         post1
@@ -1208,7 +1208,7 @@ defmodule AshGraphql.ReadTest do
             sponsored_comments: [%{text: "sponsored"}]
           }
         )
-        |> AshGraphql.Test.Domain.update!()
+        |> Ash.update!()
 
       resp =
         """
@@ -1254,7 +1254,7 @@ defmodule AshGraphql.ReadTest do
       user =
         AshGraphql.Test.User
         |> Ash.Changeset.for_create(:create, %{name: "fred"})
-        |> AshGraphql.Test.Domain.create!()
+        |> Ash.create!()
 
       post =
         AshGraphql.Test.Post
@@ -1266,7 +1266,7 @@ defmodule AshGraphql.ReadTest do
             published: true
           }
         )
-        |> AshGraphql.Test.Domain.create!()
+        |> Ash.create!()
 
       post =
         post
@@ -1277,7 +1277,7 @@ defmodule AshGraphql.ReadTest do
             sponsored_comments: [%{text: "sponsored"}]
           }
         )
-        |> AshGraphql.Test.Domain.update!()
+        |> Ash.update!()
 
       resp =
         """

@@ -14,7 +14,7 @@ defmodule AshGraphql.RelayIdsTest do
       user =
         User
         |> Ash.Changeset.for_create(:create, %{name: "fred"})
-        |> Domain.create!()
+        |> Ash.create!()
 
       post =
         Post
@@ -26,7 +26,7 @@ defmodule AshGraphql.RelayIdsTest do
             published: true
           }
         )
-        |> Domain.create!()
+        |> Ash.create!()
 
       user_relay_id = AshGraphql.Resource.encode_relay_id(user)
       post_relay_id = AshGraphql.Resource.encode_relay_id(post)
@@ -86,7 +86,7 @@ defmodule AshGraphql.RelayIdsTest do
       user =
         User
         |> Ash.Changeset.for_create(:create, %{name: "fred"})
-        |> Domain.create!()
+        |> Ash.create!()
 
       user_relay_id = AshGraphql.Resource.encode_relay_id(user)
 
@@ -114,7 +114,7 @@ defmodule AshGraphql.RelayIdsTest do
       user =
         User
         |> Ash.Changeset.for_create(:create, %{name: "fred"})
-        |> Domain.create!()
+        |> Ash.create!()
 
       post =
         Post
@@ -126,7 +126,7 @@ defmodule AshGraphql.RelayIdsTest do
             published: true
           }
         )
-        |> Domain.create!()
+        |> Ash.create!()
 
       user_relay_id = AshGraphql.Resource.encode_relay_id(user)
       post_relay_id = AshGraphql.Resource.encode_relay_id(post)
@@ -195,7 +195,7 @@ defmodule AshGraphql.RelayIdsTest do
       resource =
         ResourceWithNoPrimaryKeyGet
         |> Ash.Changeset.for_create(:create, %{name: "foo"})
-        |> Domain.create!()
+        |> Ash.create!()
 
       document =
         """
@@ -231,7 +231,7 @@ defmodule AshGraphql.RelayIdsTest do
       user =
         User
         |> Ash.Changeset.for_create(:create, %{name: "Fred"})
-        |> Domain.create!()
+        |> Ash.create!()
 
       user_id = user.id
       user_type = AshGraphql.Resource.Info.type(User)
@@ -263,7 +263,7 @@ defmodule AshGraphql.RelayIdsTest do
       author_id =
         User
         |> Ash.Changeset.for_create(:create, %{name: "Fred"})
-        |> Domain.create!()
+        |> Ash.create!()
         |> AshGraphql.Resource.encode_relay_id()
 
       resp =
@@ -313,13 +313,13 @@ defmodule AshGraphql.RelayIdsTest do
       author_id =
         User
         |> Ash.Changeset.for_create(:create, %{name: "Fred"})
-        |> Domain.create!()
+        |> Ash.create!()
         |> AshGraphql.Resource.encode_relay_id()
 
       post_id =
         Post
         |> Ash.Changeset.for_create(:create, %{text: "foo"})
-        |> Domain.create!()
+        |> Ash.create!()
         |> AshGraphql.Resource.encode_relay_id()
 
       resp =
@@ -368,14 +368,14 @@ defmodule AshGraphql.RelayIdsTest do
       author_id =
         User
         |> Ash.Changeset.for_create(:create, %{name: "Fred"})
-        |> Domain.create!()
+        |> Ash.create!()
         |> AshGraphql.Resource.encode_relay_id()
 
       post_ids =
         Enum.map(1..5, fn i ->
           Post
           |> Ash.Changeset.for_create(:create, %{text: "foo #{i}"})
-          |> Domain.create!()
+          |> Ash.create!()
           |> AshGraphql.Resource.encode_relay_id()
         end)
 
@@ -425,14 +425,14 @@ defmodule AshGraphql.RelayIdsTest do
       author_id =
         User
         |> Ash.Changeset.for_create(:create, %{name: "Fred"})
-        |> Domain.create!()
+        |> Ash.create!()
         |> AshGraphql.Resource.encode_relay_id()
 
       post_ids =
         Enum.map(1..5, fn i ->
           Post
           |> Ash.Changeset.for_create(:create, %{text: "foo #{i}"})
-          |> Domain.create!()
+          |> Ash.create!()
           |> AshGraphql.Resource.encode_relay_id()
         end)
 
@@ -484,7 +484,7 @@ defmodule AshGraphql.RelayIdsTest do
       author_id =
         User
         |> Ash.Changeset.for_create(:create, %{name: "Fred"})
-        |> Domain.create!()
+        |> Ash.create!()
         |> AshGraphql.Resource.encode_relay_id()
 
       post_ids = [author_id]

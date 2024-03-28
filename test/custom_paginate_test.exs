@@ -18,19 +18,19 @@ defmodule AshGraphql.CustpmPaginateTest do
       channel =
         AshGraphql.Test.Channel
         |> Ash.Changeset.new(%{})
-        |> AshGraphql.Test.Domain.create!()
+        |> Ash.create!()
 
       text_message =
         AshGraphql.Test.TextMessage
         |> Ash.Changeset.for_create(:create, text: "test text message")
         |> Ash.Changeset.manage_relationship(:channel, channel, type: :append_and_remove)
-        |> AshGraphql.Test.Domain.create!()
+        |> Ash.create!()
 
       image_message =
         AshGraphql.Test.ImageMessage
         |> Ash.Changeset.for_create(:create, text: "test image message")
         |> Ash.Changeset.manage_relationship(:channel, channel, type: :append_and_remove)
-        |> AshGraphql.Test.Domain.create!()
+        |> Ash.create!()
 
       resp =
         """
@@ -89,19 +89,19 @@ defmodule AshGraphql.CustpmPaginateTest do
       channel =
         AshGraphql.Test.Channel
         |> Ash.Changeset.new(%{})
-        |> AshGraphql.Test.Domain.create!()
+        |> Ash.create!()
 
       text_message =
         AshGraphql.Test.TextMessage
         |> Ash.Changeset.for_create(:create, text: "test text message")
         |> Ash.Changeset.manage_relationship(:channel, channel, type: :append_and_remove)
-        |> AshGraphql.Test.Domain.create!()
+        |> Ash.create!()
 
       image_message =
         AshGraphql.Test.ImageMessage
         |> Ash.Changeset.for_create(:create, text: "test image message")
         |> Ash.Changeset.manage_relationship(:channel, channel, type: :append_and_remove)
-        |> AshGraphql.Test.Domain.create!()
+        |> Ash.create!()
 
       resp =
         """

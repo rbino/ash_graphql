@@ -78,7 +78,7 @@ defmodule RelatedPosts do
           AshGraphql.Test.Post
           |> Ash.Query.filter(tags.id in ^tag_ids)
           |> Ash.Query.filter(id != ^post.id)
-          |> domain.read!()
+          |> Ash.read!()
 
         {post.id, other_posts}
       end)
@@ -401,8 +401,8 @@ defmodule AshGraphql.Test.Post do
       # This is very inefficient, do not copy this pattern into your own app!!!
       values =
         [
-          SponsoredComment |> AshGraphql.Test.Domain.read!(),
-          Comment |> AshGraphql.Test.Domain.read!()
+          SponsoredComment |> Ash.read!(),
+          Comment |> Ash.read!()
         ]
         |> List.flatten()
         |> Stream.filter(&(&1.post_id == record.id))

@@ -10,7 +10,7 @@ defmodule AshGraphql.DestroyTest do
   end
 
   test "a destroy works" do
-    post = AshGraphql.Test.Domain.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
+    post = Ash.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
 
     resp =
       """
@@ -38,7 +38,7 @@ defmodule AshGraphql.DestroyTest do
   end
 
   test "a soft destroy works" do
-    post = AshGraphql.Test.Domain.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
+    post = Ash.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
 
     resp =
       """
@@ -66,7 +66,7 @@ defmodule AshGraphql.DestroyTest do
   end
 
   test "a destroy with a configured read action and no identity works" do
-    AshGraphql.Test.Domain.create!(
+    Ash.create!(
       Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar", best: true)
     )
 
@@ -92,7 +92,7 @@ defmodule AshGraphql.DestroyTest do
   end
 
   test "a destroy with an error" do
-    post = AshGraphql.Test.Domain.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
+    post = Ash.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
 
     resp =
       """
@@ -158,7 +158,7 @@ defmodule AshGraphql.DestroyTest do
       graphql: [show_raised_errors?: true, root_level_errors?: true]
     )
 
-    post = AshGraphql.Test.Domain.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
+    post = Ash.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
 
     resp =
       """

@@ -332,7 +332,7 @@ defmodule AshGraphql.CreateTest do
   end
 
   test "a create can load a calculation on a related belongs_to record" do
-    author = AshGraphql.Test.Domain.create!(Ash.Changeset.new(AshGraphql.Test.User, name: "bob"))
+    author = Ash.create!(Ash.Changeset.new(AshGraphql.Test.User, name: "bob"))
 
     resp =
       """
@@ -488,7 +488,7 @@ defmodule AshGraphql.CreateTest do
     post =
       AshGraphql.Test.Post
       |> Ash.Changeset.new(text: "foobar")
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
     resp =
       """

@@ -159,7 +159,7 @@ defmodule AshGraphql.ErrorsTest do
                  [name: "My Tag4"],
                  tenant: tenant
                )
-               |> AshGraphql.Test.Domain.create!()
+               |> Ash.create!()
 
              resp =
                """
@@ -190,7 +190,7 @@ defmodule AshGraphql.ErrorsTest do
                  [name: "My Tag2"],
                  tenant: tenant
                )
-               |> AshGraphql.Test.Domain.create!()
+               |> Ash.create!()
 
              resp =
                """
@@ -221,7 +221,7 @@ defmodule AshGraphql.ErrorsTest do
                  [name: "My Tag3"],
                  tenant: tenant
                )
-               |> AshGraphql.Test.Domain.create!()
+               |> Ash.create!()
 
              post =
                AshGraphql.Test.Post
@@ -232,7 +232,7 @@ defmodule AshGraphql.ErrorsTest do
                  on_no_match: {:create, :create_action},
                  on_lookup: :relate
                )
-               |> AshGraphql.Test.Domain.create!()
+               |> Ash.create!()
 
              resp =
                """
@@ -268,7 +268,7 @@ defmodule AshGraphql.ErrorsTest do
       |> Ash.Changeset.for_create(:create,
         name: "My Name"
       )
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
     resp =
       """
@@ -317,7 +317,7 @@ defmodule AshGraphql.ErrorsTest do
       |> Ash.Changeset.for_create(:create,
         name: "My Name"
       )
-      |> AshGraphql.Test.Domain.create!()
+      |> Ash.create!()
 
     resp =
       """
