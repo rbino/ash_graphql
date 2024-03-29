@@ -3180,8 +3180,13 @@ defmodule AshGraphql.Resource do
         {name,
          field_type(
            config[:type],
-           %{attribute | name: nested_union_type_name(attribute, name)},
-           resource
+           %{
+             attribute
+             | name: nested_union_type_name(attribute, name),
+               constraints: config[:constraints]
+           },
+           resource,
+           false
          )}
       end)
 

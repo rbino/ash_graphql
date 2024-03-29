@@ -2562,7 +2562,7 @@ defmodule AshGraphql.Graphql.Resolver do
             type =
               AshGraphql.Resource.field_type(
                 constraints[:types][type][:type],
-                field,
+                %{field | constraints: constraints[:types][type][:constraints]},
                 resource
               )
 
