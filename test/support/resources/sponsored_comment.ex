@@ -19,6 +19,7 @@ defmodule AshGraphql.Test.SponsoredComment do
   end
 
   actions do
+    default_accept(:*)
     defaults([:create, :update, :destroy])
 
     read :read do

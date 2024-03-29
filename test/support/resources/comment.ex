@@ -20,6 +20,7 @@ defmodule AshGraphql.Test.Comment do
   end
 
   actions do
+    default_accept(:*)
     defaults([:create, :update, :destroy])
 
     read :read do

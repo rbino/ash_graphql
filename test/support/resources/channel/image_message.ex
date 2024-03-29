@@ -19,6 +19,7 @@ defmodule AshGraphql.Test.ImageMessage do
   end
 
   actions do
+    default_accept(:*)
     defaults([:read, :update, :destroy])
 
     create :create do

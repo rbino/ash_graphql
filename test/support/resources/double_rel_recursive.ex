@@ -19,6 +19,7 @@ defmodule AshGraphql.Test.DoubleRelRecursive do
   end
 
   actions do
+    default_accept(:*)
     defaults([:create, :read, :update, :destroy])
   end
 

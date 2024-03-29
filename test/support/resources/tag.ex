@@ -21,6 +21,7 @@ defmodule AshGraphql.Test.Tag do
   end
 
   actions do
+    default_accept(:*)
     defaults([:read, :update, :destroy])
 
     create :create do

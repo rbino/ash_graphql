@@ -26,6 +26,8 @@ defmodule AshGraphql.Test.User do
   end
 
   actions do
+    default_accept(:*)
+
     defaults([:create, :update, :destroy, :read])
 
     create(:create_policies)

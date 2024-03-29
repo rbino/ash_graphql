@@ -17,6 +17,8 @@ defmodule AshGraphql.Test.Channel do
   end
 
   actions do
+    default_accept(:*)
+
     create :create do
       primary?(true)
     end

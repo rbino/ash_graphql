@@ -9,6 +9,7 @@ defmodule AshGraphql.Test.DoubleRelToRecursiveParentOfEmbed do
   alias AshGraphql.Test.DoubleRelRecursive
 
   actions do
+    default_accept(:*)
     defaults([:read, :create, :update, :destroy])
   end
 

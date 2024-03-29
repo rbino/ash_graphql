@@ -25,6 +25,7 @@ defmodule AshGraphql.Test.RelayIds.Post do
   end
 
   actions do
+    default_accept(:*)
     defaults([:update, :read, :destroy])
 
     create :create do

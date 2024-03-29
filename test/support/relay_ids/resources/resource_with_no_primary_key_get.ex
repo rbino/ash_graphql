@@ -19,6 +19,7 @@ defmodule AshGraphql.Test.RelayIds.ResourceWithNoPrimaryKeyGet do
   end
 
   actions do
+    default_accept(:*)
     defaults([:create, :update, :destroy, :read])
 
     read(:get_by_name, get_by: :name)

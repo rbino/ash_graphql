@@ -1,7 +1,7 @@
 defmodule AshGraphql.RelayIdsTest do
   use ExUnit.Case, async: false
 
-  alias AshGraphql.Test.RelayIds.{Domain, Post, ResourceWithNoPrimaryKeyGet, Schema, User}
+  alias AshGraphql.Test.RelayIds.{Post, ResourceWithNoPrimaryKeyGet, Schema, User}
 
   setup do
     on_exit(fn ->
@@ -22,8 +22,7 @@ defmodule AshGraphql.RelayIdsTest do
           :create,
           %{
             author_id: user.id,
-            text: "foo",
-            published: true
+            text: "foo"
           }
         )
         |> Ash.create!()
@@ -122,8 +121,7 @@ defmodule AshGraphql.RelayIdsTest do
           :create,
           %{
             author_id: user.id,
-            text: "foo",
-            published: true
+            text: "foo"
           }
         )
         |> Ash.create!()
