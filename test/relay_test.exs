@@ -796,7 +796,6 @@ defmodule AshGraphql.RelayTest do
                    %{
                      locations: [%{column: 3, line: 2}],
                      message: "Invalid value provided as a keyset for after: \"abc\"",
-                     code: "invalid_keyset",
                      short_message: "invalid keyset",
                      path: ["getRelayTags"]
                    }
@@ -833,7 +832,6 @@ defmodule AshGraphql.RelayTest do
                    %{
                      locations: [%{column: 3, line: 2}],
                      message: "Invalid value provided as a keyset for before: \"abc\"",
-                     code: "invalid_keyset",
                      short_message: "invalid keyset",
                      path: ["getRelayTags"]
                    }
