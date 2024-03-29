@@ -44,7 +44,7 @@ defmodule FullTextCalculation do
     end)
   end
 
-  def select(_, _, _), do: [:text1, :text2]
+  def load(_, _, _), do: [:text1, :text2]
 end
 
 defmodule AfterActionRaiseResourceError do
@@ -414,16 +414,18 @@ defmodule AshGraphql.Test.Post do
     calculate(
       :post_comments,
       {:array, UnionRelation},
-      fn record, _ ->
+      fn records, _ ->
         # This is very inefficient, do not copy this pattern into your own app!!!
         values =
-          [
-            SponsoredComment |> Ash.read!(),
-            Comment |> Ash.read!()
-          ]
-          |> List.flatten()
-          |> Stream.filter(&(&1.post_id == record.id))
-          |> Enum.map(&%Ash.Union{type: UnionRelation.struct_to_name(&1), value: &1})
+          Enum.map(records, fn record ->
+            [
+              SponsoredComment |> Ash.read!(),
+              Comment |> Ash.read!()
+            ]
+            |> List.flatten()
+            |> Stream.filter(&(&1.post_id == record.id))
+            |> Enum.map(&%Ash.Union{type: UnionRelation.struct_to_name(&1), value: &1})
+          end)
 
         {:ok, values}
       end,

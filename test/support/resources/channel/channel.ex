@@ -40,17 +40,16 @@ defmodule AshGraphql.Test.Channel do
     calculate(
       :direct_channel_messages,
       {:array, AshGraphql.Test.MessageUnion},
-      fn record,
-         %{
-           domain: domain
-         } ->
-        record = domain.load!(record, :messages)
+      fn records, _ ->
+        records = Ash.load!(records, :messages)
 
         {:ok,
-         record.messages
-         |> Enum.map(
-           &%Ash.Union{type: AshGraphql.Test.MessageUnion.struct_to_name(&1), value: &1}
-         )}
+         Enum.map(records, fn record ->
+           record.messages
+           |> Enum.map(
+             &%Ash.Union{type: AshGraphql.Test.MessageUnion.struct_to_name(&1), value: &1}
+           )
+         end)}
       end,
       public?: true
     )
