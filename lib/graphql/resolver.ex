@@ -1775,7 +1775,7 @@ defmodule AshGraphql.Graphql.Resolver do
 
           related_query =
             relationship.destination
-            |> Ash.Query.new(relationship.destination)
+            |> Ash.Query.new()
             |> Ash.Query.set_tenant(Map.get(context, :tenant))
             |> Ash.Query.set_context(get_context(context))
 
