@@ -847,7 +847,10 @@ defmodule AshGraphql.ReadTest do
   describe "loading through types" do
     test "loading through an embed works" do
       AshGraphql.Test.Post
-      |> Ash.Changeset.new(embed_foo: %{type: "foo", foo: "fred"}, published: true)
+      |> Ash.Changeset.for_create(:create,
+        embed_foo: %{foo: "fred"},
+        published: true
+      )
       |> Ash.create!()
 
       resp =
@@ -881,11 +884,19 @@ defmodule AshGraphql.ReadTest do
 
     test "loading through a union works" do
       AshGraphql.Test.Post
-      |> Ash.Changeset.new(text: "a", embed_union: %{type: :foo, foo: "fred"}, published: true)
+      |> Ash.Changeset.for_create(:create,
+        text: "a",
+        embed_union: %{type: :foo, foo: "fred"},
+        published: true
+      )
       |> Ash.create!()
 
       AshGraphql.Test.Post
-      |> Ash.Changeset.new(text: "b", embed_union: %{type: :bar, bar: "george"}, published: true)
+      |> Ash.Changeset.for_create(:create,
+        text: "b",
+        embed_union: %{type: :bar, bar: "george"},
+        published: true
+      )
       |> Ash.create!()
 
       resp =
@@ -937,7 +948,7 @@ defmodule AshGraphql.ReadTest do
 
     test "loading through an unnested union works" do
       AshGraphql.Test.Post
-      |> Ash.Changeset.new(
+      |> Ash.Changeset.for_create(:create,
         text: "a",
         embed_union_unnested: %{type: :foo, foo: "fred"},
         published: true
@@ -945,7 +956,7 @@ defmodule AshGraphql.ReadTest do
       |> Ash.create!()
 
       AshGraphql.Test.Post
-      |> Ash.Changeset.new(
+      |> Ash.Changeset.for_create(:create,
         text: "b",
         embed_union_unnested: %{type: :bar, bar: "george"},
         published: true
@@ -993,7 +1004,7 @@ defmodule AshGraphql.ReadTest do
 
     test "loading through a list of unnested union with aliases works" do
       AshGraphql.Test.Post
-      |> Ash.Changeset.new(
+      |> Ash.Changeset.for_create(:create,
         text: "a",
         embed_union_new_type_list: [%{type: :foo, foo: "fred"}],
         published: true
@@ -1001,7 +1012,7 @@ defmodule AshGraphql.ReadTest do
       |> Ash.create!()
 
       AshGraphql.Test.Post
-      |> Ash.Changeset.new(
+      |> Ash.Changeset.for_create(:create,
         text: "b",
         embed_union_new_type_list: [%{type: :bar, bar: "george"}],
         published: true
@@ -1055,7 +1066,7 @@ defmodule AshGraphql.ReadTest do
 
     test "loading through an unnested union with aliases works" do
       AshGraphql.Test.Post
-      |> Ash.Changeset.new(
+      |> Ash.Changeset.for_create(:create,
         text: "a",
         embed_union_unnested: %{type: :foo, foo: "fred"},
         published: true
@@ -1063,7 +1074,7 @@ defmodule AshGraphql.ReadTest do
       |> Ash.create!()
 
       AshGraphql.Test.Post
-      |> Ash.Changeset.new(
+      |> Ash.Changeset.for_create(:create,
         text: "b",
         embed_union_unnested: %{type: :bar, bar: "george"},
         published: true
@@ -1117,7 +1128,7 @@ defmodule AshGraphql.ReadTest do
 
     test "loading through an unnested union with aliases works when one is nil" do
       AshGraphql.Test.Post
-      |> Ash.Changeset.new(
+      |> Ash.Changeset.for_create(:create,
         text: "a",
         embed_union_unnested: %{type: :foo, foo: "fred"},
         published: true
@@ -1125,7 +1136,7 @@ defmodule AshGraphql.ReadTest do
       |> Ash.create!()
 
       AshGraphql.Test.Post
-      |> Ash.Changeset.new(
+      |> Ash.Changeset.for_create(:create,
         text: "b",
         published: true
       )

@@ -10,7 +10,10 @@ defmodule AshGraphql.DestroyTest do
   end
 
   test "a destroy works" do
-    post = Ash.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
+    post =
+      AshGraphql.Test.Post
+      |> Ash.Changeset.for_create(:create, text: "foobar")
+      |> Ash.create!()
 
     resp =
       """
@@ -38,7 +41,10 @@ defmodule AshGraphql.DestroyTest do
   end
 
   test "a soft destroy works" do
-    post = Ash.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
+    post =
+      AshGraphql.Test.Post
+      |> Ash.Changeset.for_create(:create, text: "foobar")
+      |> Ash.create!()
 
     resp =
       """
@@ -66,7 +72,9 @@ defmodule AshGraphql.DestroyTest do
   end
 
   test "a destroy with a configured read action and no identity works" do
-    Ash.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar", best: true))
+    AshGraphql.Test.Post
+    |> Ash.Changeset.for_create(:create, text: "foobar", best: true)
+    |> Ash.create!()
 
     resp =
       """
@@ -90,7 +98,10 @@ defmodule AshGraphql.DestroyTest do
   end
 
   test "a destroy with an error" do
-    post = Ash.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
+    post =
+      AshGraphql.Test.Post
+      |> Ash.Changeset.for_create(:create, text: "foobar", best: true)
+      |> Ash.create!()
 
     resp =
       """
@@ -156,7 +167,10 @@ defmodule AshGraphql.DestroyTest do
       graphql: [show_raised_errors?: true, root_level_errors?: true]
     )
 
-    post = Ash.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
+    post =
+      AshGraphql.Test.Post
+      |> Ash.Changeset.for_create(:create, text: "foobar", best: true)
+      |> Ash.create!()
 
     resp =
       """

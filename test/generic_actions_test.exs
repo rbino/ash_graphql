@@ -55,7 +55,10 @@ defmodule AshGraphql.GenericActionsTest do
   end
 
   test "generic action mutations can be run" do
-    post = Ash.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
+    post =
+      AshGraphql.Test.Post
+      |> Ash.Changeset.for_create(:create, text: "foobar", best: true)
+      |> Ash.create!()
 
     resp =
       """
@@ -79,7 +82,10 @@ defmodule AshGraphql.GenericActionsTest do
   end
 
   test "generic action mutations can be run with input" do
-    post = Ash.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar"))
+    post =
+      AshGraphql.Test.Post
+      |> Ash.Changeset.for_create(:create, text: "foobar", best: true)
+      |> Ash.create!()
 
     resp =
       """

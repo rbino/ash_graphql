@@ -332,7 +332,10 @@ defmodule AshGraphql.CreateTest do
   end
 
   test "a create can load a calculation on a related belongs_to record" do
-    author = Ash.create!(Ash.Changeset.new(AshGraphql.Test.User, name: "bob"))
+    author =
+      AshGraphql.Test.User
+      |> Ash.Changeset.for_create(:create, name: "bob")
+      |> Ash.create!()
 
     resp =
       """
@@ -487,7 +490,7 @@ defmodule AshGraphql.CreateTest do
   test "an upsert works" do
     post =
       AshGraphql.Test.Post
-      |> Ash.Changeset.new(text: "foobar")
+      |> Ash.Changeset.for_create(:create, text: "foobar")
       |> Ash.create!()
 
     resp =
