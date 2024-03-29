@@ -59,7 +59,6 @@ defmodule AshGraphql.Graphql.Resolver do
                     actor: Map.get(context, :actor),
                     action: action,
                     domain: domain,
-                    verbose?: AshGraphql.Domain.Info.debug?(domain),
                     authorize?: AshGraphql.Domain.Info.authorize?(domain),
                     tenant: Map.get(context, :tenant)
                   ]
@@ -165,7 +164,6 @@ defmodule AshGraphql.Graphql.Resolver do
           opts = [
             actor: Map.get(context, :actor),
             action: action,
-            verbose?: AshGraphql.Domain.Info.debug?(domain),
             authorize?: AshGraphql.Domain.Info.authorize?(domain),
             tenant: Map.get(context, :tenant)
           ]
@@ -318,7 +316,6 @@ defmodule AshGraphql.Graphql.Resolver do
         opts = [
           actor: Map.get(context, :actor),
           action: action,
-          verbose?: AshGraphql.Domain.Info.debug?(domain),
           authorize?: AshGraphql.Domain.Info.authorize?(domain),
           tenant: Map.get(context, :tenant)
         ]
@@ -416,7 +413,6 @@ defmodule AshGraphql.Graphql.Resolver do
           opts = [
             actor: Map.get(context, :actor),
             action: action,
-            verbose?: AshGraphql.Domain.Info.debug?(domain),
             authorize?: AshGraphql.Domain.Info.authorize?(domain),
             tenant: Map.get(context, :tenant)
           ]
@@ -1042,7 +1038,6 @@ defmodule AshGraphql.Graphql.Resolver do
           opts = [
             actor: Map.get(context, :actor),
             action: action,
-            verbose?: AshGraphql.Domain.Info.debug?(domain),
             authorize?: AshGraphql.Domain.Info.authorize?(domain),
             tenant: Map.get(context, :tenant),
             upsert?: upsert?
@@ -1181,7 +1176,6 @@ defmodule AshGraphql.Graphql.Resolver do
               |> set_query_arguments(read_action, read_action_input)
               |> domain.read_one(
                 action: read_action,
-                verbose?: AshGraphql.Domain.Info.debug?(domain),
                 actor: Map.get(context, :actor),
                 authorize?: AshGraphql.Domain.Info.authorize?(domain)
               )
@@ -1197,7 +1191,6 @@ defmodule AshGraphql.Graphql.Resolver do
                   opts = [
                     actor: Map.get(context, :actor),
                     action: action,
-                    verbose?: AshGraphql.Domain.Info.debug?(domain),
                     authorize?: AshGraphql.Domain.Info.authorize?(domain),
                     tenant: Map.get(context, :tenant)
                   ]
@@ -1344,7 +1337,6 @@ defmodule AshGraphql.Graphql.Resolver do
               |> set_query_arguments(action, read_action_input)
               |> domain.read_one(
                 action: read_action,
-                verbose?: AshGraphql.Domain.Info.debug?(domain),
                 actor: Map.get(context, :actor),
                 authorize?: AshGraphql.Domain.Info.authorize?(domain)
               )
@@ -1359,7 +1351,6 @@ defmodule AshGraphql.Graphql.Resolver do
                 {:ok, initial} ->
                   opts = [
                     action: action,
-                    verbose?: AshGraphql.Domain.Info.debug?(domain),
                     actor: Map.get(context, :actor),
                     authorize?: AshGraphql.Domain.Info.authorize?(domain),
                     tenant: Map.get(context, :tenant)

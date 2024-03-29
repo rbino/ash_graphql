@@ -42,6 +42,7 @@ defmodule AshGraphql.Domain do
           "For security purposes, if an error is *raised* then Ash simply shows a generic error. If you want to show those errors, set this to true."
       ],
       debug?: [
+        # TODO: this is not used anymore, what to do with this?
         type: :boolean,
         doc: "Whether or not to log (extremely verbose) debug information",
         default: false
