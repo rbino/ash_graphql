@@ -25,7 +25,7 @@ defmodule AshGraphql.PlugTest do
   test "when the actor is set, the current user returns the correct value" do
     user =
       AshGraphql.Test.User
-      |> Ash.Changeset.for_create(:create, %{name: "Marty McFly"})
+      |> Ash.Changeset.for_create(:create, %{name: "My Name"})
       |> Ash.create!()
 
     resp =

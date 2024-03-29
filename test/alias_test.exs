@@ -209,7 +209,7 @@ defmodule AliasTest do
   test "relationship alias works correctly" do
     author =
       AshGraphql.Test.User
-      |> Ash.Changeset.for_create(:create, name: "test")
+      |> Ash.Changeset.for_create(:create, name: "My Name")
       |> Ash.create!()
 
     post =

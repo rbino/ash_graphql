@@ -334,7 +334,7 @@ defmodule AshGraphql.CreateTest do
   test "a create can load a calculation on a related belongs_to record" do
     author =
       AshGraphql.Test.User
-      |> Ash.Changeset.for_create(:create, name: "bob")
+      |> Ash.Changeset.for_create(:create, name: "My Name")
       |> Ash.create!()
 
     resp =
@@ -368,7 +368,7 @@ defmodule AshGraphql.CreateTest do
                  "result" => %{
                    "fullText" => "foobar",
                    "author" => %{
-                     "nameTwice" => "bob bob"
+                     "nameTwice" => "My Name My Name"
                    }
                  }
                }

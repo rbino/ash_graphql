@@ -131,7 +131,7 @@ defmodule AshGraphql.ReadTest do
   test "loading relationships with fragment works" do
     user =
       AshGraphql.Test.User
-      |> Ash.Changeset.for_create(:create, %{name: "fred"})
+      |> Ash.Changeset.for_create(:create, %{name: "My Name"})
       |> Ash.create!()
 
     post =
@@ -186,7 +186,7 @@ defmodule AshGraphql.ReadTest do
                  %{
                    "comments" => [
                      %{
-                       "author" => %{"name" => "fred"}
+                       "author" => %{"name" => "My Name"}
                      }
                    ]
                  }
@@ -1191,12 +1191,12 @@ defmodule AshGraphql.ReadTest do
       user1 =
         AshGraphql.Test.User
         |> Ash.Changeset.for_create(:create, %{name: "fred"})
-        |> Ash.create!()
+        |> Ash.create!(authorize?: false)
 
       user2 =
         AshGraphql.Test.User
         |> Ash.Changeset.for_create(:create, %{name: "barney"})
-        |> Ash.create!()
+        |> Ash.create!(authorize?: false)
 
       post1 =
         AshGraphql.Test.Post
@@ -1264,7 +1264,7 @@ defmodule AshGraphql.ReadTest do
     test "loading relationships through an unnested union with aliases works" do
       user =
         AshGraphql.Test.User
-        |> Ash.Changeset.for_create(:create, %{name: "fred"})
+        |> Ash.Changeset.for_create(:create, %{name: "My Name"})
         |> Ash.create!()
 
       post =
@@ -1351,12 +1351,12 @@ defmodule AshGraphql.ReadTest do
                        %{
                          "__typename" => "SponsoredComment",
                          "text" => "sponsored",
-                         "p" => %{"id" => ^post_id, "user" => %{"name" => "fred"}}
+                         "p" => %{"id" => ^post_id, "user" => %{"name" => "My Name"}}
                        },
                        %{
                          "__typename" => "Comment",
                          "text" => "comment",
-                         "author" => %{"name" => "fred"}
+                         "author" => %{"name" => "My Name"}
                        }
                      ],
                      "bar" => [
@@ -1368,7 +1368,7 @@ defmodule AshGraphql.ReadTest do
                        %{
                          "__typename" => "Comment",
                          "text" => "comment",
-                         "author" => %{"name" => "fred"}
+                         "author" => %{"name" => "My Name"}
                        }
                      ]
                    }
