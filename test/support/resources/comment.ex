@@ -33,9 +33,10 @@ defmodule AshGraphql.Test.Comment do
 
   attributes do
     uuid_primary_key(:id)
-    attribute(:text, :string)
+    attribute(:text, :string, public?: true)
 
     attribute :type, :atom do
+      public?(true)
       writable?(false)
       default(:comment)
       constraints(one_of: [:comment, :reply])
@@ -48,14 +49,16 @@ defmodule AshGraphql.Test.Comment do
     calculate(
       :timestamp,
       :utc_datetime_usec,
-      expr(created_at)
+      expr(created_at),
+      public?: true
     )
   end
 
   relationships do
-    belongs_to(:post, AshGraphql.Test.Post)
+    belongs_to(:post, AshGraphql.Test.Post, public?: true)
 
     belongs_to :author, AshGraphql.Test.User do
+      public?(true)
       attribute_writable?(true)
     end
   end

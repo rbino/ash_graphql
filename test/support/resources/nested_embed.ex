@@ -11,7 +11,7 @@ defmodule AshGraphql.Test.NestedEmbed do
   end
 
   attributes do
-    attribute(:name, :string)
-    attribute(:enum, AshGraphql.Test.NestedEnum)
+    attribute(:name, :string, public?: true)
+    attribute(:enum, AshGraphql.Test.NestedEnum, public?: true)
   end
 end

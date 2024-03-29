@@ -32,15 +32,16 @@ defmodule AshGraphql.Test.SponsoredComment do
 
   attributes do
     uuid_primary_key(:id)
-    attribute(:text, :string)
+    attribute(:text, :string, public?: true)
 
     attribute :type, :atom do
+      public?(true)
       writable?(false)
       default(:sponsored)
     end
   end
 
   relationships do
-    belongs_to(:post, AshGraphql.Test.Post)
+    belongs_to(:post, AshGraphql.Test.Post, public?: true)
   end
 end

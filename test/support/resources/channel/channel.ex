@@ -49,12 +49,15 @@ defmodule AshGraphql.Test.Channel do
          |> Enum.map(
            &%Ash.Union{type: AshGraphql.Test.MessageUnion.struct_to_name(&1), value: &1}
          )}
-      end
+      end,
+      public?: true
     )
 
     calculate :indirect_channel_messages,
               AshGraphql.Test.PageOfChannelMessages,
               AshGraphql.Test.PageOfChannelMessagesCalculation do
+      public?(true)
+
       argument :offset, :integer do
         default(0)
       end
@@ -66,10 +69,10 @@ defmodule AshGraphql.Test.Channel do
   end
 
   aggregates do
-    count(:channel_message_count, :messages)
+    count(:channel_message_count, :messages, public?: true)
   end
 
   relationships do
-    has_many(:messages, AshGraphql.Test.Message)
+    has_many(:messages, AshGraphql.Test.Message, public?: true)
   end
 end

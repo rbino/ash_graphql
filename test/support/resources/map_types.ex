@@ -25,11 +25,13 @@ defmodule AshGraphql.Test.MapTypes do
       )
 
       allow_nil? false
+      public?(true)
     end
 
-    attribute(:json_map, :map)
+    attribute(:json_map, :map, public?: true)
 
     attribute :values, AshGraphql.Test.ConstrainedMap do
+      public?(true)
     end
   end
 

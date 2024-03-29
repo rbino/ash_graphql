@@ -35,7 +35,7 @@ defmodule AshGraphql.Test.MultitenantTag do
   attributes do
     uuid_primary_key(:id)
 
-    attribute(:name, :string)
+    attribute(:name, :string, public?: true)
   end
 
   identities do
@@ -46,7 +46,8 @@ defmodule AshGraphql.Test.MultitenantTag do
     many_to_many(:posts, AshGraphql.Test.Post,
       through: AshGraphql.Test.MultitenantPostTag,
       source_attribute_on_join_resource: :tag_id,
-      destination_attribute_on_join_resource: :post_id
+      destination_attribute_on_join_resource: :post_id,
+      public?: true
     )
   end
 end

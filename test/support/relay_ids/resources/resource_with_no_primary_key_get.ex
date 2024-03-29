@@ -26,7 +26,7 @@ defmodule AshGraphql.Test.RelayIds.ResourceWithNoPrimaryKeyGet do
 
   attributes do
     uuid_primary_key(:id)
-    attribute(:name, :string, allow_nil?: false)
+    attribute(:name, :string, allow_nil?: false, public?: true)
   end
 
   identities do
@@ -34,6 +34,9 @@ defmodule AshGraphql.Test.RelayIds.ResourceWithNoPrimaryKeyGet do
   end
 
   relationships do
-    has_many(:posts, AshGraphql.Test.RelayIds.Post, destination_attribute: :author_id)
+    has_many(:posts, AshGraphql.Test.RelayIds.Post,
+      destination_attribute: :author_id,
+      public?: true
+    )
   end
 end

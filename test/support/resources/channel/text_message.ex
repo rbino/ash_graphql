@@ -29,12 +29,12 @@ defmodule AshGraphql.Test.TextMessage do
   attributes do
     uuid_primary_key(:id)
 
-    attribute(:text, :string)
+    attribute(:text, :string, public?: true)
 
-    attribute(:type, :atom, default: :text, constraints: [one_of: [:text, :image]])
+    attribute(:type, :atom, default: :text, constraints: [one_of: [:text, :image]], public?: true)
   end
 
   relationships do
-    belongs_to(:channel, AshGraphql.Test.Channel)
+    belongs_to(:channel, AshGraphql.Test.Channel, public?: true)
   end
 end

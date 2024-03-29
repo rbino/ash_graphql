@@ -43,11 +43,12 @@ defmodule AshGraphql.Test.RelayIds.Post do
 
   attributes do
     uuid_primary_key(:id)
-    attribute(:text, :string)
+    attribute(:text, :string, public?: true)
   end
 
   relationships do
     belongs_to(:author, AshGraphql.Test.RelayIds.User) do
+      public?(true)
       attribute_writable?(true)
     end
   end

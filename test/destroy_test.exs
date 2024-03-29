@@ -66,9 +66,7 @@ defmodule AshGraphql.DestroyTest do
   end
 
   test "a destroy with a configured read action and no identity works" do
-    Ash.create!(
-      Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar", best: true)
-    )
+    Ash.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar", best: true))
 
     resp =
       """

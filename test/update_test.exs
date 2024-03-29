@@ -137,9 +137,7 @@ defmodule AshGraphql.UpdateTest do
 
   test "an update with a configured read action and no identity works" do
     post =
-      Ash.create!(
-        Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar", best: true)
-      )
+      Ash.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar", best: true))
 
     resp =
       """
@@ -169,9 +167,7 @@ defmodule AshGraphql.UpdateTest do
   end
 
   test "an update with a configured read action and no identity works with an argument the same name as an attribute" do
-    Ash.create!(
-      Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar", best: true)
-    )
+    Ash.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar", best: true))
 
     resp =
       """
@@ -203,9 +199,7 @@ defmodule AshGraphql.UpdateTest do
 
   test "arguments are threaded properly" do
     post =
-      Ash.create!(
-        Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar", best: true)
-      )
+      Ash.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar", best: true))
 
     resp =
       """
@@ -247,9 +241,7 @@ defmodule AshGraphql.UpdateTest do
     )
 
     post =
-      Ash.create!(
-        Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar", best: true)
-      )
+      Ash.create!(Ash.Changeset.new(AshGraphql.Test.Post, text: "foobar", best: true))
 
     resp =
       """

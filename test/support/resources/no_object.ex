@@ -27,6 +27,6 @@ defmodule AshGraphql.Test.NoObject do
   attributes do
     uuid_primary_key(:id)
 
-    attribute(:name, :string)
+    attribute(:name, :string, public?: true)
   end
 end

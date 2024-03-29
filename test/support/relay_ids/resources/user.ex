@@ -31,10 +31,13 @@ defmodule AshGraphql.Test.RelayIds.User do
 
   attributes do
     uuid_primary_key(:id)
-    attribute(:name, :string)
+    attribute(:name, :string, public?: true)
   end
 
   relationships do
-    has_many(:posts, AshGraphql.Test.RelayIds.Post, destination_attribute: :author_id)
+    has_many(:posts, AshGraphql.Test.RelayIds.Post,
+      destination_attribute: :author_id,
+      public?: true
+    )
   end
 end

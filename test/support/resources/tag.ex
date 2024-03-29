@@ -31,7 +31,7 @@ defmodule AshGraphql.Test.Tag do
   attributes do
     uuid_primary_key(:id)
 
-    attribute(:name, :string)
+    attribute(:name, :string, public?: true)
   end
 
   identities do
