@@ -458,7 +458,7 @@ defmodule AshGraphql do
 
   defp nested_attrs(type, constraints, already_checked) do
     cond do
-      Ash.Type.embedded_type?(type) ->
+      AshGraphql.Resource.embedded?(type) ->
         type
         |> unwrap_type()
         |> all_attributes_and_arguments(already_checked, true, true)
@@ -625,7 +625,7 @@ defmodule AshGraphql do
             attribute.constraints[:types]
             |> Kernel.||([])
             |> Enum.flat_map(fn {name, config} ->
-              if Ash.Type.embedded_type?(config[:type]) do
+              if AshGraphql.Resource.embedded?(config[:type]) do
                 [
                   {source_resource,
                    %{
@@ -641,7 +641,7 @@ defmodule AshGraphql do
             end)
 
           other ->
-            if Ash.Type.embedded_type?(other) do
+            if AshGraphql.Resource.embedded?(other) do
               [{source_resource, attribute}]
             else
               []
@@ -732,7 +732,7 @@ defmodule AshGraphql do
   defp get_nested_embedded_types(embedded_type) do
     embedded_type
     |> Ash.Resource.Info.public_attributes()
-    |> Enum.filter(&Ash.Type.embedded_type?(&1.type))
+    |> Enum.filter(&AshGraphql.Resource.embedded?(&1.type))
     |> Enum.map(fn attribute ->
       {attribute, unwrap_type(attribute.type)}
     end)

@@ -1189,7 +1189,7 @@ defmodule AshGraphql.Resource do
       of_type:
         maybe_wrap_non_null(
           wrap_arrays(arg_type, type, constraints[:items] || []),
-          !constraints[:nil_items?] || Ash.Type.embedded_type?(type)
+          !constraints[:nil_items?] || embedded?(type)
         )
     }
   end
@@ -2297,7 +2297,7 @@ defmodule AshGraphql.Resource do
               {type, attribute_or_aggregate}
           end
 
-        if Ash.Type.embedded_type?(type) do
+        if embedded?(type) do
           []
         else
           attribute_or_aggregate = constraints_to_item_constraints(type, attribute_or_aggregate)
@@ -2384,7 +2384,7 @@ defmodule AshGraphql.Resource do
       attribute
       | constraints: [
           items: constraints,
-          nil_items?: allow_nil? || Ash.Type.embedded_type?(attribute.type)
+          nil_items?: allow_nil? || embedded?(attribute.type)
         ]
     }
   end
@@ -2441,7 +2441,7 @@ defmodule AshGraphql.Resource do
           true
 
         calc ->
-          Ash.Type.embedded_type?(calc.type) || Enum.empty?(calc.arguments)
+          embedded?(calc.type) || Enum.empty?(calc.arguments)
       end)
 
     field_names = AshGraphql.Resource.Info.field_names(resource)
@@ -2679,7 +2679,7 @@ defmodule AshGraphql.Resource do
   defp filterable?(%{type: Ash.Type.Union}, _), do: false
 
   defp filterable?(%Ash.Resource.Calculation{type: type, calculation: {module, _opts}}, _) do
-    !Ash.Type.embedded_type?(type) && function_exported?(module, :expression, 2)
+    !embedded?(type) && function_exported?(module, :expression, 2)
   end
 
   defp filterable?(%{type: type} = attribute, resource) do
@@ -2693,7 +2693,7 @@ defmodule AshGraphql.Resource do
         resource
       )
     else
-      !Ash.Type.embedded_type?(type)
+      !embedded?(type)
     end
   end
 
@@ -4153,9 +4153,7 @@ defmodule AshGraphql.Resource do
     field_type =
       type
       |> do_field_type(new_attribute, resource, input?)
-      |> maybe_wrap_non_null(
-        !attribute.constraints[:nil_items?] || Ash.Type.embedded_type?(attribute.type)
-      )
+      |> maybe_wrap_non_null(!attribute.constraints[:nil_items?] || embedded?(attribute.type))
 
     %Absinthe.Blueprint.TypeReference.List{
       of_type: field_type
@@ -4175,7 +4173,7 @@ defmodule AshGraphql.Resource do
     if Ash.Type.builtin?(type) do
       get_specific_field_type(type, attribute, resource, input?)
     else
-      if Spark.Dsl.is?(type, Ash.Resource) && !Ash.Type.embedded_type?(type) do
+      if Ash.Resource.Info.resource?(type) && !Ash.Resource.Info.embedded?(type) do
         if input? do
           Application.get_env(:ash_graphql, :json_type) || :json_string
         else
@@ -4418,5 +4416,17 @@ defmodule AshGraphql.Resource do
     resource
     |> AshGraphql.Resource.Info.queries()
     |> Enum.find(&(&1.type == :get and (&1.identity == nil or &1.identity == false)))
+  end
+
+  def embedded?({:array, resource_or_type}) do
+    embedded?(resource_or_type)
+  end
+
+  def embedded?(resource_or_type) do
+    if Ash.Resource.Info.resource?(resource_or_type) do
+      Ash.Resource.Info.embedded?(resource_or_type)
+    else
+      Ash.Type.embedded_type?(resource_or_type)
+    end
   end
 end

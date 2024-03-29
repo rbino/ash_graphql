@@ -656,7 +656,7 @@ defmodule AshGraphql.Graphql.Resolver do
           name
         )
 
-      Ash.Type.embedded_type?(type) and is_map(value) ->
+      AshGraphql.Resource.embedded?(type) and is_map(value) ->
         create_action =
           if constraints[:create_action] do
             Ash.Resource.Info.action(type, constraints[:create_action]) ||
@@ -1915,9 +1915,9 @@ defmodule AshGraphql.Graphql.Resolver do
           already_expanded?
         )
 
-      Ash.Type.embedded_type?(type) || Ash.Resource.Info.resource?(type) ||
+      AshGraphql.Resource.embedded?(type) || Ash.Resource.Info.resource?(type) ||
           (type in [Ash.Type.Struct, :struct] && constraints[:instance_of] &&
-             (Ash.Type.embedded_type?(constraints[:instance_of]) ||
+             (AshGraphql.Resource.embedded?(constraints[:instance_of]) ||
                 Ash.Resource.Info.resource?(constraints[:instance_of]))) ->
         type =
           if type in [:struct, Ash.Type.Struct] do
