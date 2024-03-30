@@ -36,9 +36,4 @@ defmodule AshGraphql.Domain.Info do
   def show_raised_errors?(domain) do
     Extension.get_opt(domain, [:graphql], :show_raised_errors?, false, true)
   end
-
-  @doc "Wether or not to pass debug? down to internal execution"
-  def debug?(domain) do
-    Extension.get_opt(domain, [:graphql], :debug?, false)
-  end
 end

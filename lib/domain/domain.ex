@@ -40,12 +40,6 @@ defmodule AshGraphql.Domain do
         default: false,
         doc:
           "For security purposes, if an error is *raised* then Ash simply shows a generic error. If you want to show those errors, set this to true."
-      ],
-      debug?: [
-        # TODO: this is not used anymore, what to do with this?
-        type: :boolean,
-        doc: "Whether or not to log (extremely verbose) debug information",
-        default: false
       ]
     ]
   }
@@ -68,9 +62,6 @@ defmodule AshGraphql.Domain do
 
   @deprecated "See `AshGraphql.Domain.Info.show_raised_errors?/1`"
   defdelegate show_raised_errors?(domain), to: AshGraphql.Domain.Info
-
-  @deprecated "See `AshGraphql.Domain.Info.debug?/1`"
-  defdelegate debug?(domain), to: AshGraphql.Domain.Info
 
   @doc false
   def queries(domain, resources, action_middleware, schema, relay_ids?) do

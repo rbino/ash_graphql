@@ -32,7 +32,6 @@ end
 | [`root_level_errors?`](#graphql-root_level_errors?){: #graphql-root_level_errors? } | `boolean` | `false` | By default, mutation errors are shown in their result object's errors key, but this setting places those errors in the top level errors list |
 | [`error_handler`](#graphql-error_handler){: #graphql-error_handler } | `mfa` | `{AshGraphql.DefaultErrorHandler, :handle_error, []}` | Set an MFA to intercept/handle any errors that are generated. |
 | [`show_raised_errors?`](#graphql-show_raised_errors?){: #graphql-show_raised_errors? } | `boolean` | `false` | For security purposes, if an error is *raised* then Ash simply shows a generic error. If you want to show those errors, set this to true. |
-| [`debug?`](#graphql-debug?){: #graphql-debug? } | `boolean` | `false` | Whether or not to log (extremely verbose) debug information |
 
 
 
