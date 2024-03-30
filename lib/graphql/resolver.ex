@@ -2658,7 +2658,7 @@ defmodule AshGraphql.Graphql.Resolver do
               %{arguments: [_ | _]} ->
                 input_name = String.to_existing_atom("#{field}_input")
 
-                {field, {order, input[input_name] || %{}}}
+                {field, {input[input_name] || %{}, order}}
 
               _ ->
                 {field, order}
